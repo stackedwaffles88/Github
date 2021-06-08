@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="UWPSoundBar.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPSoundBar"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row ="0">
+
+            <Button Name="HamburgerButton" 
+                    RelativePanel.AlignLeftWithPanel="True" 
+                    Height="45" Width="45"  
+                    FontFamily= "Segoe MDL2 Assets" 
+                    Content="&#xE700;"
+                    Click="HamburgerButton_Click">
+                
+            </Button>
+            <Button Name ="BackButton" 
+                    RelativePanel.RightOf ="HamburgerButton"  
+                    Height  ="45" Width="45"  
+                    FontFamily= "Segoe MDL2 Assets" 
+                    Content="&#xE72B;"
+                    Click="BackButton_Click">
+                
+            </Button>
+        </RelativePanel>
+        <SplitView x:Name="SoundCategorySplitview"
+                   Grid.Row="1"
+                   DisplayMode="CompactOverlay"
+                   CompactPaneLength="45"
+                   OpenPaneLength="200">
+            <SplitView.Pane>
+
+                <ListView Name ="SoundCategoryListview" IsItemClickEnabled="True" ItemClick="SoundCategoryListview_ItemClick">
+                    
+                </ListView>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <MediaElement Name ="SoundPlayer" AutoPlay="True"/>
+                    <TextBlock Name ="CategoryTextBlock" 
+                               Text="All Sounds"
+                               FontSize="24"
+                               Grid.Row="0">
+                        
+                    </TextBlock>
+                    <GridView Name ="SoundGrid"
+                              IsItemClickEnabled="True"
+                              Grid.Row="1"
+                              ItemClick="SoundGrid_ItemClick"
+                              SelectionMode="None">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Name ="SoundImage"
+                                       Height=" 112"
+                                       Width=" 101">
+                                    
+                                </Image>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        
+                    </GridView>
+
+                </Grid>
+                
+            </SplitView.Content>
+            
+        </SplitView>
+    </Grid>
+</Page>
