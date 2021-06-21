@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UWPSoundBar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:model="using:UWPSoundBar.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -40,12 +40,32 @@
                    OpenPaneLength="200">
             <SplitView.Pane>
 
-                <ListView Name ="SoundCategoryListview" IsItemClickEnabled="True" ItemClick="SoundCategoryListview_ItemClick">
-                    
+                <ListView Name ="SoundCategoryListview" IsItemClickEnabled="True" ItemClick="SoundCategoryListview_ItemClick" ItemsSource="{x:Bind MenuItems}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:MenuItem">
+                            <StackPanel Orientation="Horizontal" 
+                                        
+                                        >
+                                <Image Height="35"
+                                       Width=" 35"
+                                       Margin="-10,10,0,10"
+                                       Source="{x:Bind IconFile}"></Image>
+                                <TextBlock FontSize="18" Margin="10,0,0,0"
+                                           VerticalAlignment="Center" 
+                                           Text ="{x:Bind Category}">
+                                    
+                                </TextBlock>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <StackPanel>
+                        
+                    </StackPanel>
                 </ListView>
             </SplitView.Pane>
             <SplitView.Content>
-                <Grid>
+                <Grid Margin="10,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -60,13 +80,16 @@
                     <GridView Name ="SoundGrid"
                               IsItemClickEnabled="True"
                               Grid.Row="1"
+                              ItemsSource="{x:Bind sounds}"
                               ItemClick="SoundGrid_ItemClick"
                               SelectionMode="None">
                         <GridView.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="model:Sound">
                                 <Image Name ="SoundImage"
                                        Height=" 112"
-                                       Width=" 101">
+                                       Width=" 101"
+                                       Source="{x:Bind ImageFile}"
+                                       >
                                     
                                 </Image>
                             </DataTemplate>

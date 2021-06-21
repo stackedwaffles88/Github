@@ -13,12 +13,20 @@ namespace UWPSoundBar.Model
         Taunts,
         Warnings
     }
-    class Sound
+    public class Sound
     {
         public string Name { get; set; }
         public SoundCategory category { get; set; }
         public string AudioFile { get; set; }
         public string ImageFile { get; set; }
+        public Sound( string na, SoundCategory cat)
+        {
+            Name = na;
+            category = cat;
+            AudioFile = $"Assets/Audio/{category}/{Name}.wav";
+            ImageFile = $"Assets/Images/{category}/{Name}.png";
+
+        }
 
     }
 }
