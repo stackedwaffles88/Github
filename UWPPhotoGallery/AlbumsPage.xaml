@@ -48,14 +48,14 @@
                 <DataTemplate x:DataType="model:Album">
                     <StackPanel>
                         <Image Name ="PhotoImage"
-                                 Width="200"
-                                 Source="{x:Bind CoverImage}">
+                               Width="200"
+                               Source="{x:Bind CoverImage}">
                         </Image>
                         <TextBlock x:Name="AlbumsName" 
                                    Text="{x:Bind Name}"
                                    VerticalAlignment="Bottom" 
                                    HorizontalTextAlignment="Center"
-                                   Foreground="Aqua"/>
+                                   Foreground="Black"/>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

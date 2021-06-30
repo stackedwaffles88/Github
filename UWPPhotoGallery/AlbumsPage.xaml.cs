@@ -30,9 +30,15 @@ namespace UWPPhotoGallery
         {
             this.InitializeComponent();
             albums = new ObservableCollection<Album>();
-            //update this
-            PhotoManager.GetAlbums(albums);
+            //Set thecontext in photomanager to this
+            this.Loaded += AlbumsPage_Loaded;
+            
+        }
 
+        private async void AlbumsPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            //update this
+            await PhotoManager.GetAlbums(albums);
         }
 
         private void PhotoGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,8 +53,10 @@ namespace UWPPhotoGallery
             //get the selected item first
             var album = (Album)PhotoGrid.SelectedItem;
             PhotoManager.SelectedAlbum = album;
+            PhotoManager.Context = "AlbumsPage";
+            PhotoManager.TitleText = "Albums";
             // more on to the next page
-            this.Frame.Navigate(typeof(SelectedAlbumPage));
+            this.Frame.Navigate(typeof(CollectionsPage));
         }
 
         private void AddNewAlbumButton_Tapped(object sender, TappedRoutedEventArgs e)

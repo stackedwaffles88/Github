@@ -34,32 +34,58 @@ namespace UWPPhotoGallery
         //public ObservableCollection<Photo> photos = new ObservableCollection<Photo>();
         public ObservableCollection<Photo> photos { get; set; }
 
-       
-        
-
         public CollectionsPage()
         {
             this.InitializeComponent();//get files to load
             photos = new ObservableCollection<Photo>();
-            PhotoManager.GetPhotosAsync(photos);
-            //this.Loaded += CollectionsPage_Loaded;
-          
+            //PhotoManager.GetPhotosAsync(photos);
+            this.Loaded += CollectionsPage_Loaded;
+
+
 
         }
 
         private async void CollectionsPage_Loaded(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                LoadingRing.IsActive = true;
+                if (PhotoManager.Context == "CollectionsPage" || PhotoManager.Context == null)
+                {
+                    await PhotoManager.GetPhotosAsync(photos);
             
+                    
+
+
+                }
+                else
+                {
+                    //we need to get the selected photos
+                    PhotoManager.GetPhotosForCurrentAlbumName(photos);
+                    ListTypeTextBox.Text = PhotoManager.SelectedAlbum.Name;
+                    
+
+                }
+                ListTypeTextBox.Visibility = Visibility.Visible;
+            }
+            finally
+            {
+                LoadingRing.IsActive = false;
+            }
            
             
+
         }
 
         private void PhotoGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
          
             Photo selectedphoto = PhotoGrid.SelectedItem as Photo;
-            PhotoManager.currentPhoto = selectedphoto;
-            this.Frame.Navigate(typeof(Photoview));
+            PhotoFlipView.SelectedItem = selectedphoto;
+            //enable flipview
+            PhotoFlipView.Visibility = Visibility.Visible;
+            //disable the listtypetextbox
+            ListTypeTextBox.Visibility = Visibility.Collapsed;
 
         }
     }

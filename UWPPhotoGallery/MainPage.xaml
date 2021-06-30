@@ -9,32 +9,68 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <SplitView Grid.Row ="0" x:Name="ImageGallerySplitView" 
-                   PaneBackground="LightBlue" DisplayMode="CompactInline" 
-                   CompactPaneLength="45">
-            <SplitView.Pane>
-                <ListView x:Name="listmenu" ItemsSource="{x:Bind menu}"  
-                          ItemClick="listmenu_ItemClick"
-                          IsItemClickEnabled="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="model:ListItem">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Height="35"
-                                       Width=" 35"
-                                       Margin="-10,10,0,10"
-                                       Source="{x:Bind MenuIcon }" 
-                                       VerticalAlignment="Center" />
-                                <TextBlock Text="{x:Bind MenuText}" 
-                                           Margin="15" 
-                                           VerticalAlignment="Center" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <Frame x:Name="PhotoGallerySplitviewContent" />
-            </SplitView.Content>
-        </SplitView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="Gray"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <TextBlock Name="TitleTextBox"
+                   Text="All Photos"
+                   Grid.Row="0"
+                   HorizontalAlignment="Center"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   FontFamily="Verdana" 
+                   TextDecorations="Underline"/>
+        <MenuBar VerticalAlignment="Top"
+                 Height="35"
+                 Width="330"
+                 HorizontalAlignment="Left"
+                 BorderThickness="20"
+                 BorderBrush="White">
+            <MenuBarItem Name="BackItm"
+                         Title="  All Photos"
+                         Width="100"
+                         FontFamily="Verdana"
+                         AutomationProperties.HelpText="Go Back" 
+                         VerticalAlignment="Stretch" 
+                         HorizontalAlignment="Stretch"
+                         Background="LightGray"
+                         Margin="0,0,10,0"
+                         Tapped="BackItm_Tapped">
+                <MenuFlyoutItem x:Name="PhotosNewFlyout" 
+                                Text="New"
+                                Click="PhotosNewFlyout_Click"/>
+                </MenuBarItem>
+                         
+            <MenuBarItem Name="AlbumsItm"  
+                         Title="Albums"
+                         Width="100"
+                         FontFamily="Verdana" 
+                         AutomationProperties.HelpText="Go to Albums" 
+                         VerticalAlignment="Stretch" 
+                         HorizontalAlignment="Stretch"
+                         Background="LightGray"
+                         Margin="0,0,10,0"
+                         Tapped="AlbumsItm_Tapped">
+                <MenuFlyoutItem x:Name="AlbumsNewFlyout" 
+                                Text="New"
+                                Click="AlbumsNewFlyout_Click"/>
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem x:Name="AlbumsEditFlyout"
+                                Text="Edit"
+                                Click="AlbumsEditFlyout_Click"/>
+            </MenuBarItem>
+            
+        </MenuBar>
+        <Frame Grid.Row="1"
+               Name="MainFrame"/>
+        
     </Grid>
 </Page>

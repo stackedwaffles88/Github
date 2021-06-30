@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:ExpenseMobileApp.Model"
+             x:Class="ExpenseMobileApp.ExpenseDisplayPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="20,0,0,0" Spacing="0">
+            <Button Text="AddExpense"
+                         Clicked="OnAddExpenseClicked"
+                         BackgroundColor="Transparent"
+                         HeightRequest="45"
+                         WidthRequest="200"/>
+            <Label Text="Budget for this month is " />
+            <Entry x:Name="Budgetmoney"/>
+
+        </StackLayout>
+    </NavigationPage.TitleView>
+   
+    <ContentPage.Content>
+        <ListView x:Name="ExpenseListview" Margin=" 0,20,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Expense">
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height= "50" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            
+                            <Entry x:Name="ExpenseNameLabel" 
+                        Grid.Column="0"
+                        Text="{Binding Name}"
+                        
+                        />
+
+                            
+                            
+                            
+                            <Entry x:Name="ExpenseAmountEntry"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Text ="{Binding Amount}"
+                                   HorizontalTextAlignment="End"
+                            />
+
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Balance Amount is "
+               HorizontalOptions="CenterAndExpand" />
+                    <Label x:Name="BalanceDisplay"
+                           HorizontalOptions="Center"
+                            />
+                </StackLayout>
+            </ListView.Footer>
+            
+        </ListView>
+        
+    </ContentPage.Content>
+   
+</ContentPage>

@@ -35,29 +35,42 @@ namespace UWPPhotoGallery
             PhotoManager.GetSelectedPhotos(selectedPhotos);
         }
 
-        
 
-       
+
+
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
             Photo Coverphoto = (Photo)SelectedPhotoGrid.SelectedItem;
-            if(Coverphoto == null)
+            if (Coverphoto == null)
             {
                 //pick any image from the seelcted photos
                 Coverphoto = selectedPhotos[0];
             }
+            //album name
+            string albumName;
+            if (AlbumnameTextbox.Text == String.Empty)
+            {
+                int count = PhotoManager.albums.Count + 1;
+                albumName = $"Album{count}";
+
+            }
+            else
+            {
+                albumName = AlbumnameTextbox.Text;
+            }
+
             //add this album
             Album newalbum = new Album
             {
                 CoverPhotoFile = Coverphoto.imageFile,
-                Name = AlbumnameTextbox.Text,
+                Name = albumName,
                 CoverImage = (BitmapImage)Coverphoto.Thumbnail
                 
             };
             
           
             PhotoManager.albums.Add(newalbum);
-            PhotoManager.SetAlbumNameinSelectedPhotos(AlbumnameTextbox.Text);
+            PhotoManager.SetAlbumNameinSelectedPhotos(albumName);
             this.Frame.Navigate(typeof(AlbumsPage));
 
         }

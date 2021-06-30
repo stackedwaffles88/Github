@@ -8,10 +8,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
+        <ProgressRing Name="LoadingRing" Grid.Column="1"  ></ProgressRing>
         <FlipView  x:Name="PhotoFlipView" 
                    Grid.Column="1" 
                    ItemsSource="{x:Bind photos}"
                    Visibility="Visible"
+                   SelectionChanged="PhotoFlipView_SelectionChanged"
            >
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="model:Photo">

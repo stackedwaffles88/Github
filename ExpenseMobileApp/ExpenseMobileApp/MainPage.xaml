@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseMobileApp.MainPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Example Item"
+                 IconImageSource="example_icon.png"
+                 Order="Primary"
+                 Priority="0" />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Welcome to Expense Tracker App!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Label Text="Set the Budget for the month to get started" FontSize="Title" Padding="30,10,30,10"/>
+        <Entry  x:Name="BudgetInputTextbox"
+                Placeholder="Enter the budget for this month" />
+        <Button x:Name="ContinueButton"
+                Text="Continue" 
+               
+                Clicked="OnContinueButtonClicked"/>
+        
+
+    </StackLayout>
+
+</ContentPage>

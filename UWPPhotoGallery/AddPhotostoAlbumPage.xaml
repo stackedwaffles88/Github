@@ -13,37 +13,91 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <RelativePanel Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            
+        </Grid.ColumnDefinitions>
+        
+        <RelativePanel Grid.Row="0" HorizontalAlignment="Stretch">
             <TextBlock RelativePanel.AlignLeftWithPanel="True" 
                        Name="MsgTextBlock" 
                        Foreground="Red" 
+                       
                        Text="Choose photos to add to a new album" 
                        HorizontalTextAlignment="Center"></TextBlock>
+            <TextBox RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       Name="AlbumName" 
+                   
+                     Header="Enter Album name"
+                       Foreground="Red" 
+                       Visibility="Collapsed"
+                       HorizontalTextAlignment="Center"></TextBox>
             <Button x:Name="AddButton" 
                     Width="100"
-                    Content="Add To Album" 
+                    Content="Done" 
                     IsEnabled="False"
-                    RelativePanel.RightOf="MsgTextBlock"
+                    RelativePanel.AlignRightWithPanel="True"
                     Click="AddButton_Click"
                     Foreground="Red"
                     Background="Gray"></Button>
+            
         </RelativePanel>
-        <GridView Grid.Row="1"
+        
+        <GridView Grid.Row="1" Grid.Column="0"
                   Name="PhotoSelectionGrid"
+           
                   ItemsSource ="{x:Bind PhotoCollection}"
                   SelectionMode="Multiple"
                   IsMultiSelectCheckBoxEnabled="True"
+                  
                   SelectionChanged="PhotoSelectionGrid_SelectionChanged">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="model:Photo">
                     <Image Name ="Photo"
                            Width="200"
+                
                            Source="{x:Bind Thumbnail}">
+                        
                     </Image>
+                    
+             
               </DataTemplate>
+                
             </GridView.ItemTemplate>
             
+            
+            
         </GridView>
+        <AppBarSeparator VerticalAlignment="Center"/>
+        <GridView Grid.Row="1" Grid.Column="1"
+                  Name="PhotoSelectedGrid"
+                  ItemsSource ="{x:Bind SelectedPhotos}"
+                  SelectionMode="Single"
+           
+                >
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="model:Photo">
+                    <Image Name ="Photo"
+                           Width="200"
+                          Tapped="Photo_Tapped"
+                          
+                           Source="{x:Bind Thumbnail}">
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Set as CoverPhoto" Click="MenuFlyoutItem_Click" />
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
+                    </Image>
 
+
+                </DataTemplate>
+
+            </GridView.ItemTemplate>
+
+
+
+        </GridView>
+        
     </Grid>
 </Page>

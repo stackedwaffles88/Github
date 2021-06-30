@@ -20,7 +20,7 @@ namespace UWPPhotoGallery.Model
         
         public BitmapImage thumbnailbitmap { get; set; }
 
-
+        public DateTime DateTaken { get; set; }
 
 
 

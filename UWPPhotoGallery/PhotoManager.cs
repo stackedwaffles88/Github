@@ -24,7 +24,9 @@ namespace UWPPhotoGallery
         public static List<Album> albums = new List<Album>();
         public static Album SelectedAlbum = new Album();
         private static bool initialised = false;
-        
+        private static bool albumsinitialised = false;
+        private static bool isImageLoaded = false;
+        public static string TitleText { get; set; }
        
         public static void GetSelectedPhotos(ObservableCollection<Photo> selphotos)
         {
@@ -35,29 +37,78 @@ namespace UWPPhotoGallery
             }
         }
        
-        public static async Task GetPhotosAsync(ObservableCollection<Photo> photos)
+        public static async Task<bool> GetPhotosAsync(ObservableCollection<Photo> photos)
         {
-
+            bool retval = true;
             //how to get absolute path
             photos.Clear();
+     
             //PhotoCollection.Clear();
             if (!initialised)
             {
-                
-                StorageFolder picturesFolder = KnownFolders.PicturesLibrary;
-                IReadOnlyList<StorageFile> fileList = await picturesFolder.GetFilesAsync();
-
-                foreach (StorageFile file in fileList)
+                try
                 {
-                    Photo newphoto = new Photo{ imageFile = file.Path };
-                                       
+                    StorageFolder picturesFolder = KnownFolders.PicturesLibrary;
+                    IReadOnlyList<StorageFile> fileList = await picturesFolder.GetFilesAsync();
+
+                    foreach (StorageFile file in fileList)
+                    {
+                        Photo newphoto = new Photo { imageFile = file.Path };
+
+                        IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read);
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.SetSource(fileStream);
+
+                        newphoto.image = bitmapImage;
+
+
+                        var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.SingleItem);
+
+                        BitmapImage thumbnailimage = new BitmapImage();
+                        await thumbnailimage.SetSourceAsync(thumbnail);
+                        newphoto.Thumbnail = thumbnailimage;
+                        newphoto.storagefile = file;
+                        PhotoCollection.Add(newphoto);
+                    }
+
+                    //add an album file to this folder
+
+                    initialised = true;
+                }
+                catch (Exception e)
+                {
+                    initialised = false;
+                }
+            }
+            PhotoCollection.ForEach(elem => photos.Add(elem));
+            return retval;
+        }
+
+        public static async Task AddNewPhoto()
+        {
+            //
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.ComputerFolder;
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
+            var files = await picker.PickMultipleFilesAsync();
+            if (files != null)
+            {
+                foreach(StorageFile selfile in files)
+                {
+                    StorageFile file = await selfile.CopyAsync(KnownFolders.PicturesLibrary);
+                    //this will make sure the file remains there for future too...
+                    Photo newphoto = new Photo { imageFile = file.Path };
+
                     IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read);
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.SetSource(fileStream);
-                    
+
                     newphoto.image = bitmapImage;
-                
-                    
+
+
                     var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.SingleItem);
 
                     BitmapImage thumbnailimage = new BitmapImage();
@@ -66,16 +117,78 @@ namespace UWPPhotoGallery
                     newphoto.storagefile = file;
                     PhotoCollection.Add(newphoto);
                 }
-                initialised = true;
             }
-            PhotoCollection.ForEach(elem => photos.Add(elem));
-            return;
-        }
 
-        public static void GetAlbums(ObservableCollection<Album> albumslist)
+        }
+        public static async Task GetAlbums(ObservableCollection<Album> albumslist)
         {
+            if (!albumsinitialised)
+            {
+                //also initialise the albums folder n keep them so that it is easy to display whenever the user asks for it
+                StorageFolder storageFolder =
+                    Windows.Storage.ApplicationData.Current.LocalFolder;
+                StorageFolder albumsFolder;
+                try
+                {
+                    albumsFolder = await storageFolder.GetFolderAsync("Albums");
+                    //albums are there start getting them one by one and creat
+                    var files = await albumsFolder.GetFilesAsync();
+                    foreach (StorageFile file in files)
+                    {
+                        //get the index of the wextensiona nd trim it to get the album name only
+                        //int index = file.Name.IndexOf(".", file.Name.Length - 1);
+                        string albumname = Path.GetFileNameWithoutExtension(file.Name);
+                       
+                        //for each existing album - create an album record and load it in memory
+                        // now for read the file and update the coverphoto and create an album record
+                        string coverfile;
+
+                        using (StreamReader sr = new StreamReader(file.Path))
+                        {
+                            //First write the path of the coverphotoimage
+                            coverfile = sr.ReadLine();
+
+                            sr.Close();
+
+                        }
+                        //load the thumbnailasync
+                        //load the file with the path
+                        StorageFolder picturesFolder = KnownFolders.PicturesLibrary;
+                        StorageFile picfile = await picturesFolder.GetFileAsync(Path.GetFileName(coverfile));
+                        
+                        var thumbnail = await picfile.GetThumbnailAsync(ThumbnailMode.SingleItem);
+                        BitmapImage thumbnailimage = new BitmapImage();
+                        await thumbnailimage.SetSourceAsync(thumbnail);
+
+
+                        Album newalbum = new Album { Name = albumname, CoverPhotoFile = coverfile, CoverImage = thumbnailimage };
+
+
+                        albums.Add(newalbum);
+                    }
+
+
+
+                }
+                catch (FileNotFoundException)
+                {
+                    //albumsFolder = await storageFolder.CreateFolderAsync("Albums");
+                    //just create this folder and keep it ready so that albums can be added later
+
+                }
+                albumsinitialised = true;
+            }
+
+           
+
+
             albums.ForEach(album => albumslist.Add(album));
 
+        }
+
+        public static void GetAllPhotos(ObservableCollection<Photo> allphotos)
+        {
+            PhotoCollection.ForEach(photo => allphotos.Add(photo));
         }
 
         public static void SetAlbumNameinSelectedPhotos(string albumName)
@@ -100,9 +213,93 @@ namespace UWPPhotoGallery
         public static void GetPhotosForCurrentAlbumName(ObservableCollection<Photo> photos)
         {
             photos.Clear();
-            var albumphotos = PhotoCollection.Where(item => item.AlbumName == SelectedAlbum.Name).ToList();
-            albumphotos.ForEach(photo => photos.Add(photo));
+            //open the file and get the contents
+            string path = $"{Windows.Storage.ApplicationData.Current.LocalFolder.Path}\\Albums\\{SelectedAlbum.Name}.txt";
+
+            StreamReader sr = new StreamReader(path);
+            string line;
+            //Read the first line of text
+            line = sr.ReadLine();
+            //Continue to read until you reach end of file
+            line = sr.ReadLine();
+            while (line != null)
+            {
+                //first line is the coverphoto for the album
+                //write the lie to console window
+                
+                //Read the next line
+                
+                //this is the first selected photo
+                //check if any of the photocollection matches with this, if so add it tot he list
+                foreach(Photo ph in PhotoCollection)
+                {
+                    if (line == ph.imageFile)
+                    {
+                        //add it to the selected photos/observable collection
+                        photos.Add(ph);
+                    }
+                }
+                line = sr.ReadLine();
+            }
+            //close the file
+            sr.Close();
+            
+            //var albumphotos = PhotoCollection.Where(item => item.AlbumName == SelectedAlbum.Name).ToList();
+            //albumphotos.ForEach(photo => photos.Add(photo));
         }
+
+        public static async Task LoadAllPhotosAsync(ObservableCollection<Photo> photos)
+        {
+            photos.Clear();
+            if (!isImageLoaded)
+            {
+                foreach (Photo ph in PhotoCollection)
+                {
+                    IRandomAccessStream fileStream = await ph.storagefile.OpenAsync(FileAccessMode.Read);
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.SetSource(fileStream);
+                    ph.image = bitmapImage;
+                }
+                isImageLoaded = true;
+            }
+            GetAllPhotos(photos);
+
+        }
+
+        public static async void AddAlbum(Album album)
+        {
+            //check if the album folder exists
+            StorageFolder storageFolder =
+                    Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFolder albumsFolder;
+            try
+            {
+                albumsFolder = await storageFolder.GetFolderAsync("Albums");
+            }
+            catch (FileNotFoundException)
+            {
+                albumsFolder = albumsFolder = await storageFolder.CreateFolderAsync("Albums");
+
+            }
+            
+            //add an album file to this folder
+            string path = $"{albumsFolder.Path}//{album.Name}.txt";
+            
+            using (StreamWriter sw = new StreamWriter (path))
+            {
+                //First write the path of the coverphotoimage
+                sw.WriteLine(album.CoverPhotoFile);
+                foreach(Photo ph in selectedPhotos)
+                {
+                    sw.WriteLine(ph.imageFile);
+                }
+                sw.Close();
+
+            }
+            albums.Add(album);
+
+        }
+       
 
     }
 }

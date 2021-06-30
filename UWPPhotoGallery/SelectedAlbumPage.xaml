@@ -28,20 +28,13 @@
         </RelativePanel>
 
         <GridView Name ="PhotoGrid"
-                              IsTapEnabled="True"
-                  
-                              Grid.Row="1"
-                      SelectionMode="Single"
-                                            
-                              ItemsSource="{x:Bind currentPhotos}"
-                              
-                              >
-
-
-
+                  IsTapEnabled="True"
+                  Grid.Row="1"
+                  SelectionMode="Single"
+                  ItemsSource="{x:Bind currentPhotos}">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="model:Photo">
-                    <StackPanel>
+                    
                         <Image Name ="PhotoImage"
                                Source="{x:Bind Thumbnail}"
                                Width="200" 
@@ -50,7 +43,7 @@
 
                         </Image>
                         
-                    </StackPanel>
+                    
                 </DataTemplate>
 
             </GridView.ItemTemplate>

@@ -28,6 +28,7 @@
             </TextBlock>
 
         </RelativePanel>
+        <ProgressRing Name="LoadingRing" Grid.Row="1"  ></ProgressRing>
         <GridView Name ="PhotoGrid"
                       IsTapEnabled="True"
                       Grid.Row="1"
@@ -43,7 +44,24 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-        
+        <FlipView  x:Name="PhotoFlipView" 
+                   Grid.Column="1" 
+                   ItemsSource="{x:Bind photos}"
+                   Visibility="Collapsed"
+                   
+           >
+            <FlipView.ItemTemplate>
+                <DataTemplate x:DataType="model:Photo">
+                    <Grid>
+                        <Image Stretch="Uniform"
+                               Source ="{x:Bind image}">
+                        </Image>
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+
+
     </Grid>
 
     

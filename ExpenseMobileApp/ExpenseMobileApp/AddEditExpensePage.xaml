@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:model="clr-namespace:ExpenseMobileApp.Model"
+             x:Class="ExpenseMobileApp.AddEditExpensePage">
+   
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="20,0,0,0" Spacing="0">
+            <Button Text="Done"
+                         Clicked="OnDoneButtonClicked"
+                         BackgroundColor="Transparent"
+                         HeightRequest="45"
+                         WidthRequest="100"/>
+            <Button Text="Cancel"
+                         Clicked="OnCancelButtonClicked"
+                         BackgroundColor="Transparent"
+                         HeightRequest="45"
+                         WidthRequest="100"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Expense Details"
+                        WidthRequest="200" />
+            <Entry x:Name="ExpenseNameLabel" 
+                        Grid.Column="1"
+                        Text="{Binding expense.Name}"
+                        />
+
+            <Label Text="Date"
+                        Grid.Row="1"
+                            />
+            <DatePicker x:Name="ExpenseDatePicker"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                                        
+                            Date="{Binding expense.Date}"
+                            />
+            <Label Text="AmountLabel"
+                        Grid.Row="2"
+                            />
+            <Entry x:Name="ExpenseAmountEntry"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Text ="{Binding expense.Amount}"
+                   HorizontalTextAlignment="End"
+                            />
+
+
+        </Grid>
+        
+        
+
+
+
+    </ContentPage.Content>
+</ContentPage>
