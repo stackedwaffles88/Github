@@ -20,10 +20,12 @@ namespace ExpenseMobileApp
         }
         protected override void OnAppearing()
         {
+            MonthlyExpense monthlyExpense = new MonthlyExpense();
             //get all expenses and set data cotext
-            ExpenseListview.ItemsSource = ExpenseManager.Expenses;
-            Budgetmoney.Text = ExpenseManager.Budget.ToString();
-            balance = ExpenseManager.Balance;
+            ExpenseManager.GetMonthlyExpenses(DateTime.Now.Month,DateTime.Now.Year, ref monthlyExpense);
+            ExpenseListview.ItemsSource = monthlyExpense.ExpenseList;
+            Budgetmoney.Text = monthlyExpense.Budget.ToString();
+            balance = monthlyExpense.Balance;
             BalanceDisplay.Text = balance.ToString();
             //ExpenseListview.SetBinding(ListView.FooterProperty, balance);
            

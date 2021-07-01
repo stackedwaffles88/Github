@@ -26,17 +26,20 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+               
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Label Text="Expense Details"
-                        WidthRequest="200" />
+                        WidthRequest="200" 
+                  
+                   HorizontalTextAlignment="Start"/>
             <Entry x:Name="ExpenseNameLabel" 
                         Grid.Column="1"
                         Text="{Binding expense.Name}"
@@ -59,8 +62,29 @@
                         Grid.Row="2"
                         Text ="{Binding expense.Amount}"
                    HorizontalTextAlignment="End"
+               
+                   />
+            <Label Text="CategoryLabel"
+                        Grid.Row="3"
                             />
 
+           
+            <Picker x:Name="CategoryPicker"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalTextAlignment="End"
+                            Title="Select A Category">
+                
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Essentials</x:String>
+                        <x:String>Dining</x:String>
+                        <x:String>Entertainment</x:String>
+                        <x:String>Retail</x:String>
+                        <x:String>Bills</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
 
         </Grid>
         

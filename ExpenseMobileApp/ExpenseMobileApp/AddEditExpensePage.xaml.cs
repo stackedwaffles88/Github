@@ -31,7 +31,7 @@ namespace ExpenseMobileApp
         {
             // update the expense list with this
             var expense = (Expense)BindingContext;
-            ExpenseManager.AddExpense(expense);
+            ExpenseManager.AddMonthlyExpense(DateTime.Now.Month, DateTime.Now.Year, expense);
 
             await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage()));
 
