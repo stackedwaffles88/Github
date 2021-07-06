@@ -131,8 +131,20 @@ namespace ExpenseMobileApp
                 }
             }
             SerializeData();
+        }
 
-
+        public static void DeleteMonthlyExpense(int month, int year, Expense expenses)
+        {
+            foreach (YearlyExpense item in yearlyExpenseList)
+            {
+                if (item.Year == year)
+                {
+                    var toremove = item.monthlyExpenseList.Where(eachmonth => eachmonth.Month == month).ToList();
+                    toremove[0].ExpenseList.Remove(expenses);
+                    break;
+                }
+            }
+            SerializeData();
         }
 
         private static void DeSerializeData()
