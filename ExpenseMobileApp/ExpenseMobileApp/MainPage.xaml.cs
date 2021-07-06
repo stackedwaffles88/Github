@@ -29,13 +29,27 @@ namespace ExpenseMobileApp
         private static int Budget = 0;
         private async void OnContinueButtonClicked(object sender, EventArgs e)
         {
-            //set the budget to the text that
-            Budget = int.Parse(BudgetInputTextbox.Text);
-            ExpenseManager.InitializeMonthlyBudget(Budget, DateTime.Now.Year, DateTime.Now.Month);
-            
-            //continue to the next page
-            // move to expense page now
-            await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage { BindingContext = new Expense()}));
+            //displays an error message if no budget amount is specified
+            if (BudgetInputTextbox.Text == null)
+            {
+                await DisplayAlert("Error", "Please Enter An Amount", "OK");
+            }
+            else
+            {
+                //set the budget to the text contents
+                Budget = int.Parse(BudgetInputTextbox.Text);
+                ExpenseManager.InitializeMonthlyBudget(Budget, DateTime.Now.Year, DateTime.Now.Month);
+
+                // move to expense page
+                await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage { BindingContext = new Expense() }));
+
+            }
+        }
+
+        private async void RadioExample_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new StartPage()));
+
         }
     }
 }

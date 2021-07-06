@@ -5,92 +5,53 @@
              x:Class="ExpenseMobileApp.AddEditExpensePage">
    
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="20,0,0,0" Spacing="0">
-            <Button Text="Done"
-                         Clicked="OnDoneButtonClicked"
-                         BackgroundColor="Transparent"
-                         HeightRequest="45"
-                         WidthRequest="100"/>
-            <Button Text="Cancel"
-                         Clicked="OnCancelButtonClicked"
-                         BackgroundColor="Transparent"
-                         HeightRequest="45"
-                         WidthRequest="100"/>
+        <StackLayout Orientation="Horizontal" 
+                     VerticalOptions="Center" 
+                     Margin="20,0,0,0" 
+                     Spacing="0">
+           
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Content>
-
-
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-               
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Label Text="Expense Details"
-                        WidthRequest="200" 
-                  
-                   HorizontalTextAlignment="Start"/>
-            <Entry x:Name="ExpenseNameLabel" 
-                        Grid.Column="1"
-                        Text="{Binding expense.Name}"
-                        />
-
-            <Label Text="Date"
-                        Grid.Row="1"
-                            />
-            <DatePicker x:Name="ExpenseDatePicker"
-                            Grid.Column="1"
-                            Grid.Row="1"
-                                        
-                            Date="{Binding expense.Date}"
-                            />
-            <Label Text="AmountLabel"
-                        Grid.Row="2"
-                            />
-            <Entry x:Name="ExpenseAmountEntry"
-                        Grid.Column="1"
-                        Grid.Row="2"
-                        Text ="{Binding expense.Amount}"
-                   HorizontalTextAlignment="End"
-               
-                   />
-            <Label Text="CategoryLabel"
-                        Grid.Row="3"
-                            />
-
-           
-            <Picker x:Name="CategoryPicker"
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    HorizontalTextAlignment="End"
-                            Title="Select A Category">
+            <StackLayout Grid.Row="0"
+                         Margin="0,50,0,0">
+                <Label Text="Expense Details"
+                       FontFamily="Verdana"
+                       FontAttributes="Bold"
+                       FontSize="30"
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="CenterAndExpand" />
+                <Entry x:Name="ExpenseNameLabel"
+                       Placeholder="Name"
+                       Text="{Binding expense.Name}"/>
+                <Entry x:Name="ExpenseAmountEntry"
+                       Placeholder="Amount"
+                       Text="{Binding expense.Amount}"/>
+                <DatePicker x:Name="ExpenseDatePicker"
+                            Date="{Binding expense.Date}"/>
                 
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Essentials</x:String>
-                        <x:String>Dining</x:String>
-                        <x:String>Entertainment</x:String>
-                        <x:String>Retail</x:String>
-                        <x:String>Bills</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+              <StackLayout>
+                    <Picker x:Name="CategoryPicker"
+                    Title="Select A Category"
+                        FontFamily="Verdana"
+                        SelectedItem="{Binding expense.CategoryName}"/>
 
+                </StackLayout>
+                <Button Text="Done"
+                        FontFamily="Verdana"
+                        FontSize="20"
+                        Clicked="OnDoneButtonClicked"/>
+                <Button Text="Cancel"
+                        FontFamily="Verdana"
+                        FontSize="20"
+                        Clicked="OnCancelButtonClicked"/>
+            </StackLayout>
         </Grid>
-        
-        
-
-
 
     </ContentPage.Content>
 </ContentPage>

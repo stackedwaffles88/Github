@@ -17,13 +17,28 @@ namespace ExpenseMobileApp
         public AddEditExpensePage()
         {
             InitializeComponent();
-            
+            loadCategoryPicker();
         }
 
+        public void loadCategoryPicker()
+        {
+            //load Category Picker with a list of strings
+            var categoryList = new List<string>();
+            categoryList.Add("Essentials");
+            categoryList.Add("Dining");
+            categoryList.Add("Retail");
+            categoryList.Add("Entertainment");
+            categoryList.Add("Bills");
+
+            CategoryPicker.ItemsSource = categoryList;
+        }
         protected override void OnAppearing()
         {
             //get the binding context 
             expense = (Expense)BindingContext;
+
+
+            
             // this is bound to the user
         }
 
@@ -43,5 +58,6 @@ namespace ExpenseMobileApp
             await Navigation.PopModalAsync();
 
         }
+
     }
 }
