@@ -2,25 +2,36 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExpenseMobileApp.MainPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Example Item"
-                 IconImageSource="example_icon.png"
-                 Order="Primary"
-                 Priority="0" />
-    </ContentPage.ToolbarItems>
+    
     <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Expense Tracker App!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        
+        <Frame BackgroundColor="#2196F3" 
+               Padding="24" 
+               CornerRadius="0">
+            
+            <Label Text="Welcome to Expense Tracker App!" 
+                   HorizontalTextAlignment="Center" 
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   FontFamily="Verdana"/>
         </Frame>
-        <Label Text="Set the Budget for the month to get started" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Set Your Monthly Budget" 
+               FontSize="Title" 
+               FontFamily="Verdana"
+               Padding="70,10,30,10"
+               Margin="0,20,0,0"/>
         <Entry  x:Name="BudgetInputTextbox"
-                Placeholder="Enter the budget for this month" />
+                Placeholder="Enter Budget" />
         <Button x:Name="ContinueButton"
                 Text="Continue" 
-               
+                FontFamily="Verdana"
+                FontSize="Medium"
                 Clicked="OnContinueButtonClicked"/>
-        
+        <Button x:Name="RadioExample"
+                Text="Category Options"
+                Clicked="RadioExample_Clicked"/>
 
     </StackLayout>
+
 
 </ContentPage>

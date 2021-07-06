@@ -133,4 +133,22 @@
       <Name>ExpenseMobileApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\essentialsicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\retailicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\billicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\budgeticon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\diningicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\entertainmenticon.png" />
+  </ItemGroup>
 </Project>
