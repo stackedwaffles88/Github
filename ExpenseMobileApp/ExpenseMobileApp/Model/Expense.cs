@@ -22,7 +22,7 @@ namespace ExpenseMobileApp.Model
         public string Name { get; set; }
         public int Amount { get; set; }
 
-        public DateTime Date { get; set; } = new DateTime(2021, 7, 1);
+        public DateTime Date { get; set; } = DateTime.Now;
             
 
         public string CategoryName { get; set; }

@@ -107,5 +107,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\essentialsicon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\editbutton.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

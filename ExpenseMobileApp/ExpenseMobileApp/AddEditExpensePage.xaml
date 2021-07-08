@@ -28,18 +28,18 @@
                        HorizontalOptions="CenterAndExpand" />
                 <Entry x:Name="ExpenseNameLabel"
                        Placeholder="Name"
-                       Text="{Binding expense.Name}"/>
+                       Text="{Binding Name, Mode=TwoWay}"/>
                 <Entry x:Name="ExpenseAmountEntry"
                        Placeholder="Amount"
-                       Text="{Binding expense.Amount}"/>
+                       Text="{Binding Amount}"/>
                 <DatePicker x:Name="ExpenseDatePicker"
-                            Date="{Binding expense.Date}"/>
+                            Date="{Binding Date}"/>
                 
               <StackLayout>
                     <Picker x:Name="CategoryPicker"
                     Title="Select A Category"
                         FontFamily="Verdana"
-                        SelectedItem="{Binding expense.CategoryName}"/>
+                        SelectedItem="{Binding CategoryName}"/>
 
                 </StackLayout>
                 <Button Text="Done"

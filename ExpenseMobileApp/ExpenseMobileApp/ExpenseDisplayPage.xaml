@@ -30,7 +30,7 @@
 
             <Button x:Name="PreviousMonthBtn"
                     Text="&lt;"
-                    FontSize="30"
+                    FontSize="20"
                     FontFamily="Verdana"
                     HorizontalOptions="StartAndExpand"
                     WidthRequest="40"
@@ -38,18 +38,28 @@
                     BackgroundColor="Transparent"
                     Padding="0,0,0,5"
                     Clicked="PreviousMonthBtn_Clicked"/>
-            <Label x:Name="ExpensesMonth"
-                   FontSize="20"
-                   Text="BindMonth&#10;BindYear"
-                   FontAttributes="Bold"
+           
+            
+            <Picker x:Name="MonthPicker"
+                    Title="Select A Month"
+                    FontFamily="Verdana"
+                    HorizontalTextAlignment="Center"
+                    FontAttributes="Bold"
                    TextColor="Black"
-                   VerticalTextAlignment="Center"
-                   HorizontalTextAlignment="Center">
-            </Label>
+                    FontSize="20"
+                        />
+            <Picker x:Name="YearPicker"
+                    Title="Select A Year"
+                    FontFamily="Verdana"
+                    HorizontalTextAlignment="Center"
+                    FontAttributes="Bold"
+                   TextColor="Black"
+                    FontSize="20"
+                        />
 
             <Button x:Name="NextMonthBtn"
                     Text=">"
-                    FontSize="30"
+                    FontSize="20"
                     FontFamily="Verdana"
                     HorizontalOptions="EndAndExpand"
                     WidthRequest="40"
@@ -73,10 +83,18 @@
                          Orientation="Horizontal" 
                          VerticalOptions="Center" 
                          HorizontalOptions="Center">
+                <ImageButton x:Name="EditBudget" 
+                                 HeightRequest="20"
+                                 WidthRequest="60"
+                                 HorizontalOptions="StartAndExpand"
+                                 Aspect="Fill"
+                            Clicked="EditBudget_Clicked"/>
                 <StackLayout Margin="0,0,15,0" 
                              Orientation="Vertical" 
                              VerticalOptions="FillAndExpand" 
                              HorizontalOptions="End">
+                    
+                    
                     <Label Text="Budget Total" 
                            FontSize="Medium"
                            FontFamily="Verdana"
@@ -180,7 +198,7 @@
                                 <Label x:Name="ExpenseDate"
                                    FontFamily="Verdana"
                                    FontSize="Subtitle"
-                                   Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"/>
+                                   Text="{Binding Date,StringFormat='{0:MM/dd/yyyy}'}"/>
 
 
                           </StackLayout>    
@@ -188,7 +206,8 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-            <Button Grid.Row="2" 
+            <Button x:Name="AddExpenseButton"
+                    Grid.Row="2" 
                     Text="+" 
                     BorderColor="#2b3c3c" 
                     BorderWidth="1" 

@@ -64,21 +64,63 @@ namespace ExpenseMobileApp
             return retval;
         }
 
-        public static void InitializeMonthlyBudget(int budget, int year, int month)
+        public static int GetMonthlyBudget(int year, int month)
         {
-            bool foundYear = false;
-            //create new month
-            MonthlyExpense newmonth = new MonthlyExpense { Budget = budget, ExpenseList = new List<Expense>(), Month = month };
-            
+            int budget = 0;
             foreach (YearlyExpense item in yearlyExpenseList)
             {
                 //check if the year matches first
                 if (item.Year == year)
                 {
                     //year is already there , just initialise for the month and go ahead
-                    
-                    item.monthlyExpenseList.Add(newmonth);
+                    //check if the month is already initialised - if so change the budget - else initiliaze a new month and move on
+                    foreach (MonthlyExpense monthly in item.monthlyExpenseList)
+                    {
+                        if (monthly.Month == month)
+                        {
+                            //month found
+                            //change budget and move on
+                            budget = monthly.Budget;
+
+                            break;
+                        }
+                    }
+                }
+            }
+            return budget;
+        }
+        public static void SetMonthlyBudget(int budget, int year, int month)
+        {
+            bool foundYear = false;
+            //create new month
+           
+            bool foundMonth = false;
+            foreach (YearlyExpense item in yearlyExpenseList)
+            {
+                //check if the year matches first
+                if (item.Year == year)
+                {
+                    //year is already there , just initialise for the month and go ahead
+                    //check if the month is already initialised - if so change the budget - else initiliaze a new month and move on
+                    foreach(MonthlyExpense monthly in item.monthlyExpenseList)
+                    {
+                        if (monthly.Month == month)
+                        {
+                            //month found
+                            //change budget and move on
+                            foundMonth = true;
+                            monthly.Budget = budget;
+
+                            break;
+                        }
+                    }
                     foundYear = true;
+                    if (!foundMonth)
+                    {
+                        MonthlyExpense newmonth = new MonthlyExpense { Budget = budget, ExpenseList = new List<Expense>(), Month = month };
+                        item.monthlyExpenseList.Add(newmonth);
+                        //add a new month to this year and move on
+                    }
                     break;
                     
                 }
@@ -87,6 +129,7 @@ namespace ExpenseMobileApp
             {
                 //create a year object and add the new month to it
                 YearlyExpense newyear = new YearlyExpense { Year = year, monthlyExpenseList = new List<MonthlyExpense>() };
+                MonthlyExpense newmonth = new MonthlyExpense { Budget = budget, ExpenseList = new List<Expense>(), Month = month };
                 newyear.monthlyExpenseList.Add(newmonth);
                 yearlyExpenseList.Add(newyear);
 
@@ -107,8 +150,12 @@ namespace ExpenseMobileApp
                 {
                     //year is already there , just initialise for the month and go ahead
                     var expenselist = item.monthlyExpenseList.Where(eachmonth => eachmonth.Month == month).ToList();
-                    //this will have only one item
-                    monthlyexpense = expenselist[0];
+                    //it may happen that we have this month details
+                    if (expenselist.Count > 0)
+                    {
+                        //this will have only one item
+                        monthlyexpense = expenselist[0];
+                    }
                     break;
 
                 }
@@ -117,7 +164,7 @@ namespace ExpenseMobileApp
             
         }
 
-        public static void AddMonthlyExpense(int month, int year, Expense expenses)
+        public static void AddModifyMonthlyExpense(int month, int year, Expense oldExpense, Expense expenses)
         {
             foreach (YearlyExpense item in yearlyExpenseList)
             {
@@ -126,7 +173,13 @@ namespace ExpenseMobileApp
                 {
                     //whenever we add expense - let us make sure to write everything to a file
                     var toadd = item.monthlyExpenseList.Where(eachmonth => eachmonth.Month == month).ToList();
+                    //first check if the oldexpense has to be replaced
+                    if (oldExpense != null)
+                    {
+                        toadd[0].ExpenseList.Remove(oldExpense);
+                    }
                     toadd[0].ExpenseList.Add(expenses);
+
                     break;
                 }
             }

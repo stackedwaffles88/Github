@@ -13,11 +13,14 @@ namespace ExpenseMobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddEditExpensePage : ContentPage
     {
-        public Expense expense { get; set; }
+        private int currentMonth;
+        private int currentYear;
+        public Expense expenseContext { get; set; }
         public AddEditExpensePage()
         {
             InitializeComponent();
             loadCategoryPicker();
+            
         }
 
         public void loadCategoryPicker()
@@ -35,8 +38,14 @@ namespace ExpenseMobileApp
         protected override void OnAppearing()
         {
             //get the binding context 
-            expense = (Expense)BindingContext;
-
+            expenseContext = (Expense)BindingContext;
+            //date picker should display date corresponding only to that month and year and not any value
+            //if it is a new expense 
+            currentMonth = expenseContext.Date.Month;
+            currentYear = expenseContext.Date.Year;
+            //set min max values for the picker
+            ExpenseDatePicker.MinimumDate = new DateTime(currentYear, currentMonth, 1);
+            ExpenseDatePicker.MaximumDate = new DateTime(currentYear, currentMonth, DateTime.DaysInMonth(currentYear,currentMonth));
 
             
             // this is bound to the user
@@ -46,9 +55,11 @@ namespace ExpenseMobileApp
         {
             // update the expense list with this
             var expense = (Expense)BindingContext;
-            ExpenseManager.AddMonthlyExpense(DateTime.Now.Month, DateTime.Now.Year, expense);
-
-            await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage()));
+            ExpenseManager.AddModifyMonthlyExpense(currentMonth, currentYear, expenseContext, expense);
+            //move to the expense display page to display the current month and year
+            // pass month and year as binding context to the expensedisplaypage
+            string yearMonth = $"{currentMonth}.{currentYear}";
+            await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage { BindingContext = yearMonth }));
 
         }
 

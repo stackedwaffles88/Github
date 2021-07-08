@@ -20,10 +20,16 @@ namespace ExpenseMobileApp
 
         protected async override void OnAppearing()
         {
+            string yearMonth = $"{DateTime.Now.Month}.{DateTime.Now.Year}";
             //Decide what template to display based on condition
             if (ExpenseManager.IsMonthInitialised(DateTime.Now.Year, DateTime.Now.Month))
             {
-                await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage() ));
+               
+                await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage { BindingContext = yearMonth } ));
+            }
+            else
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new SetBudgetPage { BindingContext = yearMonth }));
             }
         }
         private static int Budget = 0;
@@ -38,10 +44,10 @@ namespace ExpenseMobileApp
             {
                 //set the budget to the text contents
                 Budget = int.Parse(BudgetInputTextbox.Text);
-                ExpenseManager.InitializeMonthlyBudget(Budget, DateTime.Now.Year, DateTime.Now.Month);
+                ExpenseManager.SetMonthlyBudget(Budget, DateTime.Now.Year, DateTime.Now.Month);
 
                 // move to expense page
-                await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage { BindingContext = new Expense() }));
+                await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage { BindingContext = new Expense { Date = DateTime.Now } }));
 
             }
         }
