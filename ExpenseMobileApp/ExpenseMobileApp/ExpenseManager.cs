@@ -34,7 +34,8 @@ namespace ExpenseMobileApp
         private static List<YearlyExpense> yearlyExpenseList = new List<YearlyExpense>();
         public static void InitializeData()
         {
-            string filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "YearlyExpenses.xml");
+            string filepath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "YearlyExpenses.xml");
             bool isfilethere = File.Exists(filepath);
             if (isfilethere)
             {

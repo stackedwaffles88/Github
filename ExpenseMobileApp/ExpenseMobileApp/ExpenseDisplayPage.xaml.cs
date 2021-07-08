@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using ExpenseMobileApp.ViewModel;
+
 namespace ExpenseMobileApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -184,6 +186,34 @@ namespace ExpenseMobileApp
             var selectedYear = (int)YearPicker.SelectedItem;
             string yearMonth = $"{selectedmonth}.{selectedYear}";
             await Navigation.PushModalAsync(new NavigationPage(new SetBudgetPage { BindingContext = yearMonth }));
+        }
+
+        private async void ViewExpensesInPie_Clicked(object sender, EventArgs e)
+        {
+            MonthlyExpense monthlyExpense = new MonthlyExpense();
+
+            //get all expenses and set data context
+            ExpenseManager.GetMonthlyExpenses(currentMonth, currentYear, ref monthlyExpense);
+
+            Dictionary<string, int> ExpensesbyCategory = new Dictionary<string, int>();
+            foreach (Expense item in monthlyExpense.ExpenseList)
+            {
+                if (ExpensesbyCategory.ContainsKey(item.CategoryName))
+                {
+                    int existingAmount = ExpensesbyCategory[item.CategoryName];
+                    int newAmount = existingAmount + item.Amount;
+                    ExpensesbyCategory.Remove(item.CategoryName);
+                    ExpensesbyCategory.Add(item.CategoryName, newAmount);
+                }
+                else
+                {
+                    ExpensesbyCategory.Add(item.CategoryName, item.Amount);
+                }
+            }
+
+            await Navigation.PushModalAsync(new NavigationPage 
+              (new PieChrtView { BindingContext = new PieChartViewerImpl(ExpensesbyCategory) }));
+        
         }
     }
 }
