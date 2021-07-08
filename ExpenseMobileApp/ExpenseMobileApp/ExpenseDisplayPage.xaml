@@ -30,7 +30,7 @@
 
             <Button x:Name="PreviousMonthBtn"
                     Text="&lt;"
-                    FontSize="20"
+                    FontSize="30"
                     FontFamily="Verdana"
                     HorizontalOptions="StartAndExpand"
                     WidthRequest="40"
@@ -59,7 +59,7 @@
 
             <Button x:Name="NextMonthBtn"
                     Text=">"
-                    FontSize="20"
+                    FontSize="30"
                     FontFamily="Verdana"
                     HorizontalOptions="EndAndExpand"
                     WidthRequest="40"
@@ -84,10 +84,11 @@
                          VerticalOptions="Center" 
                          HorizontalOptions="Center">
                 <ImageButton x:Name="EditBudget" 
-                                 HeightRequest="20"
-                                 WidthRequest="60"
+                                 HeightRequest="10"
+                                 WidthRequest="20"
+                             BackgroundColor="Transparent"
                                  HorizontalOptions="StartAndExpand"
-                                 Aspect="Fill"
+                             Padding="0,30,0,0"
                             Clicked="EditBudget_Clicked"/>
                 <StackLayout Margin="0,0,15,0" 
                              Orientation="Vertical" 
@@ -229,8 +230,8 @@
                     Text="Trend" 
                     BorderColor="#2b3c3c" 
                     BorderWidth="1" 
-                    FontSize="10"
-                    Padding="0,0,0,5"
+                    FontSize="15"
+                    FontFamily="Verdana"
                     FontAttributes="Bold" 
                     BackgroundColor="#2196F3" 
                     BorderRadius="35" 

@@ -19,7 +19,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0"
-                         Margin="0,50,0,0">
+                         Margin="0,40,0,0">
                 <Label Text="Expense Details"
                        FontFamily="Verdana"
                        FontAttributes="Bold"
@@ -34,14 +34,17 @@
                        Text="{Binding Amount}"/>
                 <DatePicker x:Name="ExpenseDatePicker"
                             Date="{Binding Date}"/>
-                
-              <StackLayout>
-                    <Picker x:Name="CategoryPicker"
-                    Title="Select A Category"
-                        FontFamily="Verdana"
-                        SelectedItem="{Binding CategoryName}"/>
 
-                </StackLayout>
+                <Label x:Name="CatSelection"
+                           Text="{Binding CategoryName, TargetNullValue='(Select A Category)'}"
+                           FontSize="20">
+                </Label>
+
+                <BoxView Color="gray"
+                         HeightRequest="2"
+                         HorizontalOptions="Fill"/>
+                
+                
                 <Button Text="Done"
                         FontFamily="Verdana"
                         FontSize="20"

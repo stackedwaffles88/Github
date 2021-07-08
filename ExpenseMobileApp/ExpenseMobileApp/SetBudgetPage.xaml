@@ -3,24 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExpenseMobileApp.SetBudgetPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="0,100,0,0">
             
             
-            <Label x:Name ="BudgetLabel" Text="Set Your Monthly Budget for" 
-               FontSize="Title" 
+            <Label x:Name ="BudgetLabel" 
+                   Text="Set Your Monthly Budget" 
+               FontSize="25" 
                FontAttributes="Bold"
                FontFamily="Verdana"
-               Padding="70,10,30,10"
+                   HorizontalOptions="Center"
                Margin="0,20,0,0"/>
             <Label x:Name ="YearMonthLabel" 
                FontSize="Title" 
                FontAttributes="Bold"
                FontFamily="Verdana"
-               Padding="70,10,30,10"
-               HorizontalTextAlignment="Center"
-               />
+               HorizontalTextAlignment="Center"/>
+               
             
             <Entry  x:Name="BudgetInputTextbox"
+                    FontSize="25"
                 Placeholder="Enter Budget" />
             <Button x:Name="ContinueButton"
                 Text="Continue" 

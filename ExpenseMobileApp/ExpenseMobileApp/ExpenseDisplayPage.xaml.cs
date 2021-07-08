@@ -75,7 +75,7 @@ namespace ExpenseMobileApp
             }
             EditDeleteStack.IsVisible = false;
 
-            EditBudget.Source = $"{Environment.CurrentDirectory}/Resources/Editbutton.png";
+            EditBudget.Source = "edit.png";
 
             //if you are displaying for current month then disable the > button
             if (currentMonth  == DateTime.Now.Month && currentYear == DateTime.Now.Year)

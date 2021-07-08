@@ -137,21 +137,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\essentialsicon.png" />
+    <BundleResource Include="Resources\entertainment.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\retailicon.png" />
+    <BundleResource Include="Resources\essentials.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\billicon.png" />
+    <BundleResource Include="Resources\retail.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\budgeticon.jpg" />
+    <BundleResource Include="Resources\bill.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\diningicon.png" />
+    <BundleResource Include="Resources\dining.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\entertainmenticon.png" />
+    <BundleResource Include="Resources\edit.png" />
   </ItemGroup>
 </Project>

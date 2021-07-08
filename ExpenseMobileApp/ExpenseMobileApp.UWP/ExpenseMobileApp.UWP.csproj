@@ -104,15 +104,15 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\billicon.png" />
-    <Content Include="Assets\budgeticon.jpg" />
-    <Content Include="Assets\diningicon.png" />
-    <Content Include="Assets\entertainmenticon.png" />
-    <Content Include="Assets\essentialsicon.png" />
+    <Content Include="Assets\bill.png" />
+    <Content Include="Assets\dining.png" />
+    <Content Include="Assets\edit.png" />
+    <Content Include="Assets\entertainment.png" />
+    <Content Include="Assets\essentials.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
-    <Content Include="Assets\retailicon.png" />
+    <Content Include="Assets\retail.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />

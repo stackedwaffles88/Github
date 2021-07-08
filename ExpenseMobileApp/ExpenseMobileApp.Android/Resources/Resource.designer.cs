@@ -11822,7 +11822,7 @@ namespace ExpenseMobileApp.Droid
 			public const int avd_show_password = 2131165307;
 			
 			// aapt resource value: 0x7F07007C
-			public const int billicon = 2131165308;
+			public const int bill = 2131165308;
 			
 			// aapt resource value: 0x7F07007D
 			public const int btn_checkbox_checked_mtrl = 2131165309;
@@ -11849,40 +11849,40 @@ namespace ExpenseMobileApp.Droid
 			public const int btn_radio_on_to_off_mtrl_animation = 2131165316;
 			
 			// aapt resource value: 0x7F070085
-			public const int budgeticon = 2131165317;
+			public const int clear_button_icon = 2131165317;
 			
 			// aapt resource value: 0x7F070086
-			public const int clear_button_icon = 2131165318;
+			public const int design_bottom_navigation_item_background = 2131165318;
 			
 			// aapt resource value: 0x7F070087
-			public const int design_bottom_navigation_item_background = 2131165319;
+			public const int design_fab_background = 2131165319;
 			
 			// aapt resource value: 0x7F070088
-			public const int design_fab_background = 2131165320;
+			public const int design_ic_visibility = 2131165320;
 			
 			// aapt resource value: 0x7F070089
-			public const int design_ic_visibility = 2131165321;
+			public const int design_ic_visibility_off = 2131165321;
 			
 			// aapt resource value: 0x7F07008A
-			public const int design_ic_visibility_off = 2131165322;
+			public const int design_password_eye = 2131165322;
 			
 			// aapt resource value: 0x7F07008B
-			public const int design_password_eye = 2131165323;
+			public const int design_snackbar_background = 2131165323;
 			
 			// aapt resource value: 0x7F07008C
-			public const int design_snackbar_background = 2131165324;
+			public const int dining = 2131165324;
 			
 			// aapt resource value: 0x7F07008D
-			public const int diningicon = 2131165325;
+			public const int edit = 2131165325;
 			
 			// aapt resource value: 0x7F07008E
 			public const int editbutton = 2131165326;
 			
 			// aapt resource value: 0x7F07008F
-			public const int entertainmenticon = 2131165327;
+			public const int entertainment = 2131165327;
 			
 			// aapt resource value: 0x7F070090
-			public const int essentialsicon = 2131165328;
+			public const int essentials = 2131165328;
 			
 			// aapt resource value: 0x7F070091
 			public const int ic_mtrl_checked_circle = 2131165329;
@@ -11993,7 +11993,7 @@ namespace ExpenseMobileApp.Droid
 			public const int notify_panel_notification_icon_bg = 2131165364;
 			
 			// aapt resource value: 0x7F0700B5
-			public const int retailicon = 2131165365;
+			public const int retail = 2131165365;
 			
 			// aapt resource value: 0x7F0700B6
 			public const int test_custom_background = 2131165366;
