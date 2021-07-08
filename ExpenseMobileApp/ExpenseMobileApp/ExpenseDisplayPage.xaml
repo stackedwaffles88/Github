@@ -223,6 +223,25 @@
                     Margin="0,0,20,22" 
                     VerticalOptions="End"
                     Clicked="OnAddExpenseClicked"/>
+          
+            <Button x:Name="ViewExpensesInPie"
+                    Grid.Row="2" 
+                    Text="Trend" 
+                    BorderColor="#2b3c3c" 
+                    BorderWidth="1" 
+                    FontSize="10"
+                    Padding="0,0,0,5"
+                    FontAttributes="Bold" 
+                    BackgroundColor="#2196F3" 
+                    BorderRadius="35" 
+                    TextColor="Black"
+                    HorizontalOptions="End" 
+                    WidthRequest="80" 
+                    HeightRequest="40" 
+                    Margin="22,20,105,20" 
+                    VerticalOptions="End"
+                    Clicked="ViewExpensesInPie_Clicked"/>
+
         </Grid>
     </ContentPage.Content>
    
