@@ -4,22 +4,22 @@
              x:Class="ExpenseMobileApp.SetBudgetPage">
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="#2196F3" 
-               Padding="24" 
-               CornerRadius="0">
-
-                <Label x:Name ="SetbudgetLabel" Text="Welcome to Expense Tracker App!" 
-                   HorizontalTextAlignment="Center" 
-                   FontSize="36"
-                   FontAttributes="Bold"
-                   FontFamily="Verdana"/>
-            </Frame>
             
-            <Label x:Name ="BudgetLable" Text="Set Your Monthly Budget for" 
+            
+            <Label x:Name ="BudgetLabel" Text="Set Your Monthly Budget for" 
                FontSize="Title" 
+               FontAttributes="Bold"
                FontFamily="Verdana"
                Padding="70,10,30,10"
                Margin="0,20,0,0"/>
+            <Label x:Name ="YearMonthLabel" 
+               FontSize="Title" 
+               FontAttributes="Bold"
+               FontFamily="Verdana"
+               Padding="70,10,30,10"
+               HorizontalTextAlignment="Center"
+               />
+            
             <Entry  x:Name="BudgetInputTextbox"
                 Placeholder="Enter Budget" />
             <Button x:Name="ContinueButton"
@@ -27,6 +27,11 @@
                 FontFamily="Verdana"
                 FontSize="Medium"
                 Clicked="OnContinueButtonClicked"/>
+            <Button x:Name="CancelButton"
+                Text="Cancel" 
+                FontFamily="Verdana"
+                FontSize="Medium"
+                Clicked="OnCancelButtonClicked"/>
             
         </StackLayout>
     </ContentPage.Content>

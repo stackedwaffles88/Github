@@ -5,32 +5,7 @@
     
     <StackLayout>
         
-        <Frame BackgroundColor="#2196F3" 
-               Padding="24" 
-               CornerRadius="0">
-            
-            <Label Text="Welcome to Expense Tracker App!" 
-                   HorizontalTextAlignment="Center" 
-                   FontSize="36"
-                   FontAttributes="Bold"
-                   FontFamily="Verdana"/>
-        </Frame>
-        <Label Text="Set Your Monthly Budget" 
-               FontSize="Title" 
-               FontFamily="Verdana"
-               Padding="70,10,30,10"
-               Margin="0,20,0,0"/>
-        <Entry  x:Name="BudgetInputTextbox"
-                Placeholder="Enter Budget" />
-        <Button x:Name="ContinueButton"
-                Text="Continue" 
-                FontFamily="Verdana"
-                FontSize="Medium"
-                Clicked="OnContinueButtonClicked"/>
-        <Button x:Name="RadioExample"
-                Text="Category Options"
-                Clicked="RadioExample_Clicked"/>
-
+       
     </StackLayout>
 
 

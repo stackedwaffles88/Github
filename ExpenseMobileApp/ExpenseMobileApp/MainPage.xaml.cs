@@ -29,33 +29,10 @@ namespace ExpenseMobileApp
             }
             else
             {
-                await Navigation.PushModalAsync(new NavigationPage(new SetBudgetPage { BindingContext = yearMonth }));
+                await Navigation.PushModalAsync(new SetBudgetPage { BindingContext = yearMonth });
             }
         }
-        private static int Budget = 0;
-        private async void OnContinueButtonClicked(object sender, EventArgs e)
-        {
-            //displays an error message if no budget amount is specified
-            if (BudgetInputTextbox.Text == null)
-            {
-                await DisplayAlert("Error", "Please Enter An Amount", "OK");
-            }
-            else
-            {
-                //set the budget to the text contents
-                Budget = int.Parse(BudgetInputTextbox.Text);
-                ExpenseManager.SetMonthlyBudget(Budget, DateTime.Now.Year, DateTime.Now.Month);
-
-                // move to expense page
-                await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage { BindingContext = new Expense { Date = DateTime.Now } }));
-
-            }
-        }
-
-        private async void RadioExample_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new StartPage()));
-
-        }
+        
+        
     }
 }

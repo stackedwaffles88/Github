@@ -59,7 +59,8 @@ namespace ExpenseMobileApp
             //move to the expense display page to display the current month and year
             // pass month and year as binding context to the expensedisplaypage
             string yearMonth = $"{currentMonth}.{currentYear}";
-            await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage { BindingContext = yearMonth }));
+            await Navigation.PopModalAsync();
+            //await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage { BindingContext = yearMonth }));
 
         }
 

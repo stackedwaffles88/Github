@@ -18,21 +18,6 @@ namespace ExpenseMobileApp
     {
         private int currentMonth ;
         private int currentYear;
-        private enum Months
-        {
-            January,
-            February,
-            March,
-            April,
-            May,
-            June,
-            July,
-            August,
-            September,
-            October,
-            November,
-            December
-        };
         public int balance { get; set; }
         public ExpenseDisplayPage()
         {
@@ -43,7 +28,7 @@ namespace ExpenseMobileApp
             
             YearPicker.ItemsSource = new List<int> { currentyear, currentyear - 1, currentyear - 2 };
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             var  context = (string)BindingContext;
             string[] info = context.Split('.');
@@ -54,27 +39,39 @@ namespace ExpenseMobileApp
 
             //get all expenses and set data context
             ExpenseManager.GetMonthlyExpenses(currentMonth, currentYear, ref monthlyExpense);
-            if (monthlyExpense.Month >0)
-            {
-                ExpenseListview.ItemsSource = monthlyExpense.ExpenseList.OrderByDescending(x => x.Date);
-                MonthBudget.Text = monthlyExpense.Budget.ToString("C", CultureInfo.CurrentCulture);
-               
-                balance = monthlyExpense.Balance;
-                BalanceDisplay.Text = balance.ToString("C", CultureInfo.CurrentCulture);
-                EditDeleteStack.IsVisible = false;
-                //neee to change the label text
-                
-
-            }
             MonthPicker.SelectedIndex = currentMonth - 1;
             YearPicker.SelectedItem = currentYear;
 
             MonthPicker.SelectedIndexChanged += MonthPicker_SelectedIndexChanged;
             YearPicker.SelectedIndexChanged += YearPicker_SelectedIndexChanged;
+
+
             if (monthlyExpense.Budget <= 0)
             {
+                //budget not yet set - prompt the user to set the budget to able to track the expenses.
                 //disable + button
+                await DisplayAlert("Alert", "Please set the budget to start expense tracking for this month", "OK");
                 AddExpenseButton.IsVisible = false;
+                ViewExpensesInPie.IsVisible = false;
+            }
+            else
+            {
+                AddExpenseButton.IsVisible = true;
+                var numberFormat = (NumberFormatInfo)CultureInfo.CurrentCulture.NumberFormat.Clone();
+                numberFormat.CurrencyNegativePattern = 1;
+                MonthBudget.Text = monthlyExpense.Budget.ToString("C", numberFormat);
+
+
+                ExpenseListview.ItemsSource = monthlyExpense.ExpenseList.OrderByDescending(x => x.Date);
+
+
+                balance = monthlyExpense.Balance;
+                BalanceDisplay.Text = balance.ToString("C", numberFormat);
+                EditDeleteStack.IsVisible = false;
+                //neee to change the label text
+                ViewExpensesInPie.IsVisible = true;
+
+
             }
             EditDeleteStack.IsVisible = false;
 
@@ -113,6 +110,7 @@ namespace ExpenseMobileApp
             string yearMonth = $"{currentMonth}.{currentYear}";
             ExpenseManager.DeleteMonthlyExpense(currentMonth, currentYear, expense);
             await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage { BindingContext = yearMonth }));
+            //await Navigation.PopModalAsync();
 
         }
 
@@ -185,7 +183,7 @@ namespace ExpenseMobileApp
             var selectedmonth = MonthPicker.SelectedIndex + 1;//0 based index
             var selectedYear = (int)YearPicker.SelectedItem;
             string yearMonth = $"{selectedmonth}.{selectedYear}";
-            await Navigation.PushModalAsync(new NavigationPage(new SetBudgetPage { BindingContext = yearMonth }));
+            await Navigation.PushModalAsync(new SetBudgetPage { BindingContext = yearMonth });
         }
 
         private async void ViewExpensesInPie_Clicked(object sender, EventArgs e)
