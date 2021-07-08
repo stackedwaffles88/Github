@@ -32,7 +32,7 @@ namespace ExpenseMobileApp
         {
             string inputstr = BudgetInputTextbox.Text;
             //displays an error message if no budget amount is specified
-            if (String.IsNullOrEmpty(inputstr) || !int.TryParse(inputstr, out _) || int.Parse(inputstr) <=0)
+            if (String.IsNullOrEmpty(inputstr) || !Double.TryParse(inputstr, out _) || Double.Parse(inputstr) <=0)
             {
                 await DisplayAlert("Error", "Please Enter A valid Amount", "OK");
             }
@@ -41,7 +41,7 @@ namespace ExpenseMobileApp
                 string[] info = context.Split('.');
                
                 //set the budget to the text contents
-                int Budget = int.Parse(BudgetInputTextbox.Text);
+                double Budget = double.Parse(BudgetInputTextbox.Text);
                 ExpenseManager.SetMonthlyBudget(Budget, int.Parse(info[1]), int.Parse(info[0]));
 
                 // move to expense page

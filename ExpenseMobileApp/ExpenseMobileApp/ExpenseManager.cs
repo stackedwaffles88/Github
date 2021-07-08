@@ -65,9 +65,9 @@ namespace ExpenseMobileApp
             return retval;
         }
 
-        public static int GetMonthlyBudget(int year, int month)
+        public static double GetMonthlyBudget(int year, int month)
         {
-            int budget = 0;
+            double budget = 0;
             foreach (YearlyExpense item in yearlyExpenseList)
             {
                 //check if the year matches first
@@ -90,7 +90,7 @@ namespace ExpenseMobileApp
             }
             return budget;
         }
-        public static void SetMonthlyBudget(int budget, int year, int month)
+        public static void SetMonthlyBudget(double budget, int year, int month)
         {
             bool foundYear = false;
             //create new month

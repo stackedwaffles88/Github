@@ -10,10 +10,10 @@ namespace ExpenseMobileApp.ViewModel
     {
         public ObservableCollection<CategoryExpensePie> Data { get; set; }
 
-        public PieChartViewerImpl(Dictionary<string, int> expensesbyCategory)
+        public PieChartViewerImpl(Dictionary<string, double> expensesbyCategory)
         {
             Data = new ObservableCollection<CategoryExpensePie>();
-            foreach(KeyValuePair<string, int> entry in expensesbyCategory)
+            foreach(KeyValuePair<string, double> entry in expensesbyCategory)
             {
                 CategoryExpensePie randomObj = new CategoryExpensePie()
                 {

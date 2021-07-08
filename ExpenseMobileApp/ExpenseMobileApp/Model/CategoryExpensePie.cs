@@ -6,7 +6,7 @@ namespace ExpenseMobileApp.Model
 {
     public class CategoryExpensePie
     {
-        public int AmountForCategory { get; set; }
+        public double AmountForCategory { get; set; }
         public string CategoryName { get; set; }
 
     }

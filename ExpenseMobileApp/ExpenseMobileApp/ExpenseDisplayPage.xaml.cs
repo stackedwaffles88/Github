@@ -18,7 +18,7 @@ namespace ExpenseMobileApp
     {
         private int currentMonth ;
         private int currentYear;
-        public int balance { get; set; }
+        public double balance { get; set; }
         public ExpenseDisplayPage()
         {
             InitializeComponent();
@@ -193,13 +193,13 @@ namespace ExpenseMobileApp
             //get all expenses and set data context
             ExpenseManager.GetMonthlyExpenses(currentMonth, currentYear, ref monthlyExpense);
 
-            Dictionary<string, int> ExpensesbyCategory = new Dictionary<string, int>();
+            Dictionary<string, double> ExpensesbyCategory = new Dictionary<string, double>();
             foreach (Expense item in monthlyExpense.ExpenseList)
             {
                 if (ExpensesbyCategory.ContainsKey(item.CategoryName))
                 {
-                    int existingAmount = ExpensesbyCategory[item.CategoryName];
-                    int newAmount = existingAmount + item.Amount;
+                    double existingAmount = ExpensesbyCategory[item.CategoryName];
+                    double newAmount = existingAmount + item.Amount;
                     ExpensesbyCategory.Remove(item.CategoryName);
                     ExpensesbyCategory.Add(item.CategoryName, newAmount);
                 }
