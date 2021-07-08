@@ -42,13 +42,12 @@ namespace ExpenseMobileApp
         private void ExpenseListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EditDeleteStack.IsVisible = true;
-            
         }
 
         private async void DeleteExpense_Clicked(object sender, EventArgs e)
         {
-            ExpenseListview.SelectedItem = null;
             var expense = (Expense)BindingContext;
+            expense = (Expense)ExpenseListview.SelectedItem;
             ExpenseManager.DeleteMonthlyExpense(DateTime.Now.Month, DateTime.Now.Year, expense);
             await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage()));
 
@@ -56,9 +55,9 @@ namespace ExpenseMobileApp
 
         private async void EditExpense_Clicked(object sender, EventArgs e)
         {
-            ExpenseListview.SelectedItem = null;
+            var expense = ExpenseListview.SelectedItem;
             await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage
-            { BindingContext = (Expense)ExpenseListview.SelectedItem }));
+            { BindingContext = expense }));
         }
 
         private void CancelSelection_Clicked(object sender, EventArgs e)
@@ -76,5 +75,6 @@ namespace ExpenseMobileApp
         {
             await Navigation.PushModalAsync(new NavigationPage(new ExpenseDisplayPage()));
         }
+
     }
 }

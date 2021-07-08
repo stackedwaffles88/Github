@@ -18,6 +18,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            
+            
             <StackLayout Grid.Row="0"
                          Margin="0,50,0,0">
                 <Label Text="Expense Details"
@@ -28,20 +30,22 @@
                        HorizontalOptions="CenterAndExpand" />
                 <Entry x:Name="ExpenseNameLabel"
                        Placeholder="Name"
-                       Text="{Binding expense.Name}"/>
+                       Text="{Binding Name}"/>
                 <Entry x:Name="ExpenseAmountEntry"
                        Placeholder="Amount"
-                       Text="{Binding expense.Amount}"/>
+                       Text="{Binding Amount}"/>
                 <DatePicker x:Name="ExpenseDatePicker"
-                            Date="{Binding expense.Date}"/>
-                
-              <StackLayout>
-                    <Picker x:Name="CategoryPicker"
-                    Title="Select A Category"
+                            Date="{Binding Date}"/>
+                <Label x:Name="CatSelection"
+                       Text="{Binding CatName}"/>
+                <ImageButton Source="{Binding CategoryIcon}"
+                             HeightRequest="50"
+                             WidthRequest="50"
+                             BackgroundColor="Transparent"/>
+                <Button Text="Choose A Category"
                         FontFamily="Verdana"
-                        SelectedItem="{Binding expense.CategoryName}"/>
-
-                </StackLayout>
+                        FontSize="20"
+                        Clicked="CategoryChoiceBtn_Clicked"/>
                 <Button Text="Done"
                         FontFamily="Verdana"
                         FontSize="20"
@@ -51,7 +55,8 @@
                         FontSize="20"
                         Clicked="OnCancelButtonClicked"/>
             </StackLayout>
+            
+            
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>

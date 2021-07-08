@@ -46,10 +46,5 @@ namespace ExpenseMobileApp
             }
         }
 
-        private async void RadioExample_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new StartPage()));
-
-        }
     }
 }

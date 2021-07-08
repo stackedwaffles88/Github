@@ -104,15 +104,35 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\bill.png" />
     <Content Include="Assets\billicon.png" />
+    <Content Include="Assets\billicon2.png" />
+    <Content Include="Assets\billicon3.png" />
+    <Content Include="Assets\billicon4.png" />
     <Content Include="Assets\budgeticon.jpg" />
+    <Content Include="Assets\dining.png" />
     <Content Include="Assets\diningicon.png" />
+    <Content Include="Assets\diningicon2.png" />
+    <Content Include="Assets\diningicon3.png" />
+    <Content Include="Assets\diningicon4.png" />
+    <Content Include="Assets\entertainment.png" />
     <Content Include="Assets\entertainmenticon.png" />
+    <Content Include="Assets\entertainmenticon2.png" />
+    <Content Include="Assets\entertainmenticon3.png" />
+    <Content Include="Assets\entertainmenticon4.png" />
+    <Content Include="Assets\essentials.png" />
     <Content Include="Assets\essentialsicon.png" />
+    <Content Include="Assets\essentialsicon2.png" />
+    <Content Include="Assets\essentialsicon3.png" />
+    <Content Include="Assets\essentialsicon4.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\retail.png" />
     <Content Include="Assets\retailicon.png" />
+    <Content Include="Assets\retailicon2.png" />
+    <Content Include="Assets\retailicon3.png" />
+    <Content Include="Assets\retailicon4.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />

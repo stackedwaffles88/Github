@@ -27,9 +27,6 @@
                 FontFamily="Verdana"
                 FontSize="Medium"
                 Clicked="OnContinueButtonClicked"/>
-        <Button x:Name="RadioExample"
-                Text="Category Options"
-                Clicked="RadioExample_Clicked"/>
 
     </StackLayout>
 

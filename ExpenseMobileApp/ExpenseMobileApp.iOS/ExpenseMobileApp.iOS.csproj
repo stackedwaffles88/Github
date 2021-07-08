@@ -151,4 +151,64 @@
   <ItemGroup>
     <BundleResource Include="Resources\entertainmenticon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\entertainmenticon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\essentialsicon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\essentialsicon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\essentialsicon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\retailicon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\retailicon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\retailicon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\billicon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\billicon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\billicon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\diningicon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\diningicon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\diningicon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\entertainmenticon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\entertainmenticon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\bill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dining.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\entertainment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\essentials.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\retail.png" />
+  </ItemGroup>
 </Project>
