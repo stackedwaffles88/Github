@@ -13,16 +13,16 @@ namespace ExpenseMobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryChoice : ContentPage
     {
-        public List<CategoryItem> CatItem;
+        public List<CategoryItem> CatItems;
         public Expense expense { get; set; }
         public CategoryChoice()
         {
             InitializeComponent();
 
-            CategoryItem ci = new CategoryItem();
-            Expense ex = new Expense();
-            ex.CategoryName = ci.CatName;
-            ex.CategoryIcon = ci.CatIcon;
+            //CategoryItem ci = new CategoryItem();
+            //Expense ex = new Expense();
+            //ex.CategoryName = ci.CatName;
+            //ex.CategoryIcon = ci.CatIcon;
         }
 
         protected override void OnAppearing()
@@ -30,7 +30,7 @@ namespace ExpenseMobileApp
             expense = (Expense)BindingContext;
 
             CategoryItem catitem = new CategoryItem();
-            CatItem = new List<CategoryItem>
+            CatItems = new List<CategoryItem>
             {
                 new CategoryItem
                 {
@@ -59,7 +59,7 @@ namespace ExpenseMobileApp
                 },
             };
 
-            CategoryIconView.ItemsSource = CatItem;
+            CategoryIconView.ItemsSource = CatItems;
 
 
         }
@@ -73,10 +73,17 @@ namespace ExpenseMobileApp
             //await Navigation.PopModalAsync();
 
 
-            var expense = (Expense)BindingContext;
-            var selected = CategoryIconView.SelectedItem;
+            //var expense = (Expense)CategoryIconView.SelectedItem;
+            var selected = CategoryIconView.SelectedItem as CategoryItem;
+            expense.CategoryName = selected.CatName;
+            
             await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage
             { BindingContext = expense }));
+        }
+
+        private void Entry_Focused(object sender, FocusEventArgs e)
+        {
+
         }
     }
 }

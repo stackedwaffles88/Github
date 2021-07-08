@@ -172,11 +172,12 @@
                                    Text ="{Binding Amount, StringFormat='${0:N}'}"
                                    HorizontalTextAlignment="End"/>
 
-                                <Label x:Name="CategoryExpenseView"
+                                    
+                                    <Label x:Name="CategoryExpenseView"
                                      FontFamily="Verdana"
-                                     FontSize="Subtitle"
+                                     FontSize="Medium"
                                      Text="{Binding CategoryName, TargetNullValue='(No Category Selected)'}" />
-                              
+                                    
                                 <Label x:Name="ExpenseDate"
                                    FontFamily="Verdana"
                                    FontSize="Subtitle"
