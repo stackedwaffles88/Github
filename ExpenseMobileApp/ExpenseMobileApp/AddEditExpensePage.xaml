@@ -28,15 +28,19 @@
                        HorizontalOptions="CenterAndExpand" />
                 <Entry x:Name="ExpenseNameLabel"
                        Placeholder="Name"
-                       Text="{Binding Name, Mode=TwoWay}"/>
+                       Text="{Binding Name, Mode=OneWay}"/>
                 <Entry x:Name="ExpenseAmountEntry"
                        Placeholder="Amount"
-                       Text="{Binding Amount}"/>
+                       Text="{Binding Amount, Mode=OneWay}"/>
                 <DatePicker x:Name="ExpenseDatePicker"
-                            Date="{Binding Date}"/>
+                            Date="{Binding Date, Mode=OneWay}"/>
+                
+             
+                    
+
 
                 <Label x:Name="CatSelection"
-                           Text="{Binding CategoryName, TargetNullValue='(Select A Category)'}"
+                           Text="{Binding CategoryName, Mode=OneWay, TargetNullValue='(Select A Category)'}"
                            FontSize="20">
                 </Label>
 

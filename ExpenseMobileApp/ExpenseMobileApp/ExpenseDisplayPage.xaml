@@ -83,13 +83,7 @@
                          Orientation="Horizontal" 
                          VerticalOptions="Center" 
                          HorizontalOptions="Center">
-                <ImageButton x:Name="EditBudget" 
-                                 HeightRequest="10"
-                                 WidthRequest="20"
-                             BackgroundColor="Transparent"
-                                 HorizontalOptions="StartAndExpand"
-                             Padding="0,30,0,0"
-                            Clicked="EditBudget_Clicked"/>
+                
                 <StackLayout Margin="0,0,15,0" 
                              Orientation="Vertical" 
                              VerticalOptions="FillAndExpand" 
@@ -160,6 +154,7 @@
             <CollectionView x:Name="ExpenseListview" 
                         Margin="10,10,10,20"
                         Grid.Row="2"
+                            VerticalScrollBarVisibility="Always"
                         EmptyView="No Expenses for this Month"
                         SelectionMode="Single"
                         SelectionChanged="ExpenseListview_SelectionChanged">

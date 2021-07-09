@@ -50,7 +50,7 @@ namespace ExpenseMobileApp
             {
                 //budget not yet set - prompt the user to set the budget to able to track the expenses.
                 //disable + button
-                await DisplayAlert("Alert", "Please set the budget to start expense tracking for this month", "OK");
+                await DisplayAlert("Alert", "Please click on the budget to set budget and get started with expense tracking", "OK");
                 AddExpenseButton.IsVisible = false;
                 ViewExpensesInPie.IsVisible = false;
             }
@@ -61,7 +61,9 @@ namespace ExpenseMobileApp
                 numberFormat.CurrencyNegativePattern = 1;
                 MonthBudget.Text = monthlyExpense.Budget.ToString("C", numberFormat);
 
-
+                //set another collection to this
+               // List<Expense> expenses = new List<Expense>();
+                //monthlyExpense.ExpenseList.ForEach(item => expenses.Add(item));
                 ExpenseListview.ItemsSource = monthlyExpense.ExpenseList.OrderByDescending(x => x.Date);
 
 
@@ -73,9 +75,12 @@ namespace ExpenseMobileApp
 
 
             }
-            EditDeleteStack.IsVisible = false;
+            var BudgetTapped = new TapGestureRecognizer();
+            BudgetTapped.Tapped += BudgetTapped_Tapped;
+            MonthBudget.GestureRecognizers.Clear();
+            MonthBudget.GestureRecognizers.Add(BudgetTapped);
 
-            EditBudget.Source = "edit.png";
+            EditDeleteStack.IsVisible = false;
 
             //if you are displaying for current month then disable the > button
             if (currentMonth  == DateTime.Now.Month && currentYear == DateTime.Now.Year)
@@ -89,7 +94,13 @@ namespace ExpenseMobileApp
             ExpenseListview.SelectedItem = null;
         }
 
-       
+        private async void BudgetTapped_Tapped(object sender, EventArgs e)
+        {
+            var selectedmonth = MonthPicker.SelectedIndex + 1;//0 based index
+            var selectedYear = (int)YearPicker.SelectedItem;
+            string yearMonth = $"{selectedmonth}.{selectedYear}";
+            await Navigation.PushModalAsync(new SetBudgetPage { BindingContext = yearMonth });
+        }
 
         private async void OnAddExpenseClicked(object sender, EventArgs e)
         {
@@ -99,8 +110,14 @@ namespace ExpenseMobileApp
 
         private void ExpenseListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EditDeleteStack.IsVisible = true;
-            
+            if (ExpenseListview.SelectedItem != null)
+            {
+                EditDeleteStack.IsVisible = true;
+            }
+            else
+            {
+                EditDeleteStack.IsVisible = false;
+            }
         }
 
         private async void DeleteExpense_Clicked(object sender, EventArgs e)
@@ -176,15 +193,7 @@ namespace ExpenseMobileApp
 
         }
 
-        private async void EditBudget_Clicked(object sender, EventArgs e)
-        {
-            //move on to set budget page with current month and year
-
-            var selectedmonth = MonthPicker.SelectedIndex + 1;//0 based index
-            var selectedYear = (int)YearPicker.SelectedItem;
-            string yearMonth = $"{selectedmonth}.{selectedYear}";
-            await Navigation.PushModalAsync(new SetBudgetPage { BindingContext = yearMonth });
-        }
+        
 
         private async void ViewExpensesInPie_Clicked(object sender, EventArgs e)
         {
@@ -213,5 +222,17 @@ namespace ExpenseMobileApp
               (new PieChrtView { BindingContext = new PieChartViewerImpl(ExpensesbyCategory) }));
         
         }
+
+        
+        private async void EditBudget_Clicked(object sender, EventArgs e)
+        {
+            //move on to set budget page with current month and year
+
+            var selectedmonth = MonthPicker.SelectedIndex + 1;//0 based index
+            var selectedYear = (int)YearPicker.SelectedItem;
+            string yearMonth = $"{selectedmonth}.{selectedYear}";
+            await Navigation.PushModalAsync(new SetBudgetPage { BindingContext = yearMonth });
+        }
+
     }
 }

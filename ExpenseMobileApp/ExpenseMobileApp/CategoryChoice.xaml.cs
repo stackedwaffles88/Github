@@ -66,9 +66,10 @@ namespace ExpenseMobileApp
         {
             var selected = CategoryIconView.SelectedItem as CategoryItem;
             expense.CategoryName = selected.CatName;
+           await Navigation.PopModalAsync();
 
-            await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage
-            { BindingContext = expense }));
+          //  await Navigation.PushModalAsync(new NavigationPage(new AddEditExpensePage
+          //  { BindingContext = expense }));
         }
 
         private void Entry_Focused(object sender, FocusEventArgs e)
