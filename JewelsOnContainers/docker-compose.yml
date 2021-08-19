@@ -5,6 +5,27 @@ networks:
   backend:
 
 services:
+
+  webmvc:
+    image: jewels/webmvc
+    build:
+      context: .\WebMvc
+      dockerfile: Dockerfile
+    environment:
+      CatalogUrl: http://catalog
+      ASPNETCORE_ENVIRONMENT: Development
+      IdentityUrl: http://192.168.86.51:7800
+      CallBackUrl: http://localhost:4000
+    ports:
+      - "4000:80"
+    container_name: webshop
+    networks:
+      - frontend
+    depends_on:
+      - catalog
+      - tokenserver
+
+
   mssqlserver:
     image: "mcr.microsoft.com/mssql/server:latest"
     environment:
@@ -16,16 +37,46 @@ services:
     networks:
       - backend
 
+  tokensqlserver:
+    image: "mcr.microsoft.com/mssql/server:latest"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: ProductApi(!)
+    ports:
+      - "6000:1433"
+    container_name: jewelstokensqlserver
+    networks:
+      - backend
+
+  tokenserver:
+    build:
+      context: .\TokenServiceApi
+      dockerfile: Dockerfile
+    image: jewels/tokenapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      MvcClient: http://localhost:4000
+    ports:
+      - "7800:80"
+    container_name: tokenserviceapi
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - tokensqlserver
+
   catalog:
     image: jewels/catalogapi
     build:
       context: .\ProductCatalogAPI
       dockerfile: Dockerfile
     environment:
+      ASPNETCORE_ENVIRONMENT: Development
       DatabaseServer: mssqlserver
       DatabaseName: CatalogDb
       DatabaseUser: sa
       DatabasePassword: ProductApi(!)
+      ExternalCatalogUrl: http://localhost:2000
       
     ports:
       - "2000:80"
